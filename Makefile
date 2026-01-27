@@ -1,27 +1,20 @@
-# NullSec RKHunt Makefile
-
 CC = gcc
-CFLAGS = -Wall -Wextra -O2 -D_GNU_SOURCE
-LDFLAGS = 
+CFLAGS = -O2 -Wall -Wextra -D_GNU_SOURCE
+LDFLAGS = -lpthread
 
 TARGET = rkhunt
-SRC = src/rkhunt.c
-
-PREFIX ?= /usr/local
-BINDIR = $(PREFIX)/bin
-
-.PHONY: all clean install uninstall
+SOURCE = src/rkhunt.c
 
 all: $(TARGET)
 
-$(TARGET): $(SRC)
-$(CC) $(CFLAGS) -o $@ $< $(LDFLAGS)
+$(TARGET): $(SOURCE)
+$(CC) $(CFLAGS) -o $(TARGET) $(SOURCE) $(LDFLAGS)
 
 clean:
 rm -f $(TARGET)
 
 install: $(TARGET)
-install -Dm755 $(TARGET) $(DESTDIR)$(BINDIR)/$(TARGET)
+cp $(TARGET) /usr/local/bin/rkhunt
+chmod 755 /usr/local/bin/rkhunt
 
-uninstall:
-rm -f $(DESTDIR)$(BINDIR)/$(TARGET)
+.PHONY: all clean install
