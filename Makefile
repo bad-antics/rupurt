@@ -1,8 +1,8 @@
 CC = gcc
 CFLAGS = -O2 -Wall
 LDFLAGS = -lpthread
-TARGET = rkhunt
-SRC = src/rkhunt.c
+TARGET = reaper
+SRC = src/reaper.c
 PREFIX ?= /usr/local
 
 all: $(TARGET)
