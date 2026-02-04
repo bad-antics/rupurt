@@ -1,8 +1,8 @@
 /*
- * NullSec Reaper v2.5 - Advanced Rootkit Hunter
+ * NullSec Rupurt v2.5 - Advanced Rootkit Hunter
  * Comprehensive rootkit detection with extensive signature database
  * 
- * Compile: gcc -O2 -Wall -D_GNU_SOURCE -o reaper reaper.c -lpthread -lcrypto
+ * Compile: gcc -O2 -Wall -D_GNU_SOURCE -o rupurt rupurt.c -lpthread -lcrypto
  * License: MIT
  */
 
@@ -73,8 +73,8 @@
 /* Banner - minimal and professional */
 static const char *BANNER = 
 C_CYAN "  ╭──────────────────────────────────────────╮\n"
-"  │" C_WHITE "  Reaper " C_DIM "v2.5" C_CYAN "  │  " C_GRAY "Advanced Rootkit Hunter" C_CYAN "  │\n"
-"  │" C_DIM "     github.com/bad-antics/nullsec-reaper" C_CYAN " │\n"
+"  │" C_WHITE "  Rupurt " C_DIM "v2.5" C_CYAN "  │  " C_GRAY "Advanced Rootkit Hunter" C_CYAN "  │\n"
+"  │" C_DIM "     github.com/bad-antics/nullsec-rupurt" C_CYAN " │\n"
 "  ╰──────────────────────────────────────────╯" C_RESET "\n";
 
 /*
@@ -1823,7 +1823,7 @@ int main(int argc, char *argv[]) {
             print_usage(argv[0]);
             return 0;
         } else if (strcmp(argv[i], "--version") == 0) {
-            printf("Reaper v%s - Advanced Rootkit Hunter\n", VERSION);
+            printf("Rupurt v%s - Advanced Rootkit Hunter\n", VERSION);
             printf("Signatures: 200+ rootkits, bootkits, eBPF threats\n");
             return 0;
         } else if (strcmp(argv[i], "-a") == 0 || strcmp(argv[i], "--all") == 0) {
@@ -1879,7 +1879,7 @@ int main(int argc, char *argv[]) {
             fprintf(stderr, "Cannot open log file: %s\n", log_path);
         } else {
             time_t now = time(NULL);
-            fprintf(log_file, "Reaper v%s - Scan started at %s\n", VERSION, ctime(&now));
+            fprintf(log_file, "Rupurt v%s - Scan started at %s\n", VERSION, ctime(&now));
         }
     }
     

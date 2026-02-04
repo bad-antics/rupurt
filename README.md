@@ -1,16 +1,17 @@
 <div align="center">
 
 ```
-▄▄▄  ▄▄▄ .▄▄▄·  ▄▄▄·▄▄▄ .▄▄▄  
-▀▄ █·▀▄.▀·▐█ ▀█ ▐█ ▄█▀▄.▀·▀▄ █·
-▐▀▀▄ ▐▀▀▪▄▄█▀▀█  ██▀·▐▀▀▪▄▐▀▀▄ 
-▐█•█▌▐█▄▄▌▐█ ▪▐▌▐█▪·•▐█▄▄▌▐█•█▌
-.▀  ▀ ▀▀▀  ▀  ▀ .▀    ▀▀▀ .▀  ▀
-        ☠️ n01d rootkit hunter
+██████╗ ██╗   ██╗██████╗ ██╗   ██╗██████╗ ████████╗
+██╔══██╗██║   ██║██╔══██╗██║   ██║██╔══██╗╚══██╔══╝
+██████╔╝██║   ██║██████╔╝██║   ██║██████╔╝   ██║   
+██╔══██╗██║   ██║██╔═══╝ ██║   ██║██╔══██╗   ██║   
+██║  ██║╚██████╔╝██║     ╚██████╔╝██║  ██║   ██║   
+╚═╝  ╚═╝ ╚═════╝ ╚═╝      ╚═════╝ ╚═╝  ╚═╝   ╚═╝   
+              ☠️ Linux Rootkit Hunter
 ```
 
 <p>
-  <img src="https://img.shields.io/badge/n01d-reaper-ff0000?style=for-the-badge&logo=target&logoColor=white" alt="n01d">
+  <img src="https://img.shields.io/badge/rupurt-hunter-ff0000?style=for-the-badge&logo=target&logoColor=white" alt="rupurt">
   <img src="https://img.shields.io/badge/version-2.5.0-00ff00?style=for-the-badge" alt="Version">
   <img src="https://img.shields.io/badge/signatures-250%2B-ff0000?style=for-the-badge" alt="Signatures">
   <img src="https://img.shields.io/badge/modules-15-blue?style=for-the-badge" alt="Modules">
@@ -18,8 +19,7 @@
 </p>
 
 <p>
-  <a href="https://github.com/bad-antics/n01d-reaper"><img src="https://img.shields.io/github/stars/bad-antics/n01d-reaper?style=social" alt="Stars"></a>
-  <a href="https://github.com/bad-antics"><img src="https://img.shields.io/badge/n01d-toolkit-000000?style=flat-square&logo=github" alt="n01d"></a>
+  <a href="https://github.com/bad-antics/rupurt"><img src="https://img.shields.io/github/stars/bad-antics/rupurt?style=social" alt="Stars"></a>
 </p>
 
 *Comprehensive Linux rootkit detection with modern threat signatures, eBPF analysis, memory forensics, and APT implant detection*
@@ -76,8 +76,8 @@
 
 ```bash
 # Clone repository
-git clone https://github.com/bad-antics/n01d-reaper
-cd n01d-reaper
+git clone https://github.com/bad-antics/rupurt
+cd rupurt
 
 # Build from source
 make
@@ -86,29 +86,29 @@ make
 sudo make install
 
 # Run scan
-sudo reaper --full
+sudo rupurt --full
 ```
 
 ## 📖 Usage
 
 ```bash
 # Quick scan (essential checks)
-sudo reaper --quick
+sudo rupurt --quick
 
 # Full system scan
-sudo reaper --full
+sudo rupurt --full
 
 # Paranoid mode (everything)
-sudo reaper --paranoid
+sudo rupurt --paranoid
 
 # Specific modules
-sudo reaper --syscall --ebpf --memory
+sudo rupurt --syscall --ebpf --memory
 
 # JSON output for SIEM integration
-sudo reaper --full --json > report.json
+sudo rupurt --full --json > report.json
 
 # Continuous monitoring
-sudo reaper --monitor --interval 300
+sudo rupurt --monitor --interval 300
 ```
 
 ## 🔧 Command Line Options
@@ -165,12 +165,13 @@ sudo reaper --monitor --interval 300
 ## 📁 Output Example
 
 ```
-▄▄▄  ▄▄▄ .▄▄▄·  ▄▄▄·▄▄▄ .▄▄▄  
-▀▄ █·▀▄.▀·▐█ ▀█ ▐█ ▄█▀▄.▀·▀▄ █·
-▐▀▀▄ ▐▀▀▪▄▄█▀▀█  ██▀·▐▀▀▪▄▐▀▀▄ 
-▐█•█▌▐█▄▄▌▐█ ▪▐▌▐█▪·•▐█▄▄▌▐█•█▌
-.▀  ▀ ▀▀▀  ▀  ▀ .▀    ▀▀▀ .▀  ▀
-        ☠️ n01d rootkit hunter v2.5.0
+██████╗ ██╗   ██╗██████╗ ██╗   ██╗██████╗ ████████╗
+██╔══██╗██║   ██║██╔══██╗██║   ██║██╔══██╗╚══██╔══╝
+██████╔╝██║   ██║██████╔╝██║   ██║██████╔╝   ██║   
+██╔══██╗██║   ██║██╔═══╝ ██║   ██║██╔══██╗   ██║   
+██║  ██║╚██████╔╝██║     ╚██████╔╝██║  ██║   ██║   
+╚═╝  ╚═╝ ╚═════╝ ╚═╝      ╚═════╝ ╚═╝  ╚═╝   ╚═╝   
+              ☠️ Linux Rootkit Hunter v2.5.0
 
 [*] Starting full system scan...
 [+] Kernel: Linux 6.5.0-generic x86_64
@@ -198,19 +199,6 @@ sudo reaper --monitor --interval 300
 
 ---
 
-## 🔗 Part of the n01d Toolkit
-
-| Tool | Description |
-|------|-------------|
-| [n01d-forge](https://github.com/bad-antics/n01d-forge) | Forensic disk imaging |
-| [n01d-machine](https://github.com/bad-antics/n01d-machine) | Secure VM manager |
-| [n01d-reaper](https://github.com/bad-antics/n01d-reaper) | Rootkit hunter |
-| [n01d-media](https://github.com/bad-antics/n01d-media) | Cyberpunk media suite |
-| [n01d-term](https://github.com/bad-antics/n01d-term) | Hacker terminal |
-| [n01d-notes](https://github.com/bad-antics/n01d-notes) | Secure note-taking |
-
----
-
 ## 📜 License
 
 MIT License - See [LICENSE](LICENSE) for details.
@@ -220,8 +208,8 @@ MIT License - See [LICENSE](LICENSE) for details.
 <div align="center">
   <p>
     <a href="https://github.com/bad-antics">
-      <img src="https://img.shields.io/badge/Made%20with-☠️-ff0000?style=for-the-badge" alt="Made with skull">
+      <img src="https://img.shields.io/badge/Made%20by-bad--antics-ff0000?style=for-the-badge&logo=github" alt="bad-antics">
     </a>
   </p>
-  <p><i>Hunt the hunters. Reap the reapers.</i></p>
+  <p><i>Hunt the hunters.</i></p>
 </div>
