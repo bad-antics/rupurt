@@ -129,6 +129,119 @@ sudo rupurt --monitor --interval 300
 | `--json` | JSON output format |
 | `--monitor` | Continuous monitoring mode |
 | `--update` | Update signature database |
+| `--verbose` | Detailed output with process IDs, file paths, hashes, and confidence scores |
+| `--output FILE` | Write detailed report to file (supports `.json`, `.csv`, `.txt`) |
+| `--threshold N` | Minimum confidence score to report (0-100, default: 50) |
+| `--whitelist FILE` | Path to whitelist file — skip known-safe processes/files |
+| `--exclude PATH` | Exclude specific path from scanning |
+| `--no-color` | Disable colored output (for piping/logging) |
+
+---
+
+## 📊 Detailed Reports
+
+For detailed forensic output including process IDs, file paths, hashes, and confidence scores:
+
+```bash
+# Verbose scan with full details
+sudo rupurt --full --verbose
+
+# Save detailed JSON report
+sudo rupurt --full --verbose --output report.json
+
+# Example JSON output per finding:
+# {
+#   "id": "RUPURT-2024-0042",
+#   "module": "ebpf",
+#   "severity": "warning",
+#   "confidence": 72,
+#   "description": "Suspicious eBPF program attached to syscall",
+#   "process": { "pid": 1842, "name": "bpf_loader", "uid": 0 },
+#   "file": { "path": "/sys/fs/bpf/probe", "hash": "sha256:a1b2c3..." },
+#   "timestamp": "2026-02-23T10:15:30Z"
+# }
+```
+
+---
+
+## ⚠️ False Positive Handling
+
+Signature-based detection can flag legitimate software. Here's how to handle false positives:
+
+### Adjusting Sensitivity
+
+```bash
+# Lower sensitivity — only report high-confidence findings (75+)
+sudo rupurt --full --threshold 75
+
+# Higher sensitivity — catch more but expect more false positives
+sudo rupurt --paranoid --threshold 25
+```
+
+### Whitelisting Known-Safe Items
+
+Create a whitelist file to skip known-safe processes and paths:
+
+```bash
+# Create whitelist
+cat > /etc/rupurt/whitelist.conf << 'EOF'
+# Format: type:value
+# Types: process, path, hash, ebpf_id
+
+# Known-safe eBPF programs (monitoring tools)
+ebpf_id:42
+ebpf_id:43
+
+# System processes that look suspicious but are legitimate
+process:snapd
+process:systemd-oomd
+
+# Paths to exclude
+path:/opt/monitoring-agent/
+path:/snap/
+
+# Known-safe file hashes
+hash:sha256:abc123def456...
+EOF
+
+# Run with whitelist
+sudo rupurt --full --whitelist /etc/rupurt/whitelist.conf
+```
+
+### Per-Scan Exclusions
+
+```bash
+# Exclude specific paths
+sudo rupurt --full --exclude /opt/my-monitoring --exclude /snap
+
+# Combine with threshold
+sudo rupurt --full --threshold 70 --exclude /opt/security-tools
+```
+
+### Reporting False Positives
+
+If you encounter a false positive, please [open an issue](https://github.com/bad-antics/rupurt/issues/new?labels=false-positive&template=false_positive.md) with:
+1. The `--verbose --json` output for the finding
+2. What the flagged process/file actually is
+3. Your kernel version (`uname -r`)
+
+This helps improve detection accuracy for everyone.
+
+---
+
+## 🔍 Confidence Scores
+
+Each finding includes a confidence score (0-100):
+
+| Score | Level | Meaning |
+|-------|-------|---------|
+| 90-100 | 🔴 Critical | Almost certainly malicious — known rootkit signature match |
+| 70-89 | 🟠 High | Strong indicators — behavioral match + suspicious attributes |
+| 50-69 | 🟡 Medium | Suspicious — warrants investigation, may be legitimate |
+| 25-49 | 🔵 Low | Unusual but likely benign — security tools, debuggers, etc. |
+| 0-24 | ⚪ Info | Informational — logged but not alarming |
+
+Default threshold is **50** (medium+). Use `--threshold` to adjust.
 
 ---
 
